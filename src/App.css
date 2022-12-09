@@ -27,6 +27,7 @@ nav h1 {
   color: white;
   font-size: 45px;
 }
+
 .game {
   width: 100vw;
   height: calc(100vh - 170px);
@@ -64,16 +65,43 @@ nav h1 {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-#correct {
-  background-color: #528d4e;
+.row > div.correct {
+  --background-color: #528d4e;
+  animation: flip 0.5s ease forwards;
 }
 
-#almost {
-  background-color: #b49f39;
+.row > div.almost {
+  --background-color: #b49f39;
+  animation: flip 0.5s ease forwards;
 }
 
-#error {
-  background-color: #3a393c;
+.row > div.error {
+  --background-color: #3a393c;
+  animation: flip 0.5s ease forwards;
+}
+
+.row > div:nth-child(2) {
+  -webkit-animation-delay: 0.2s;
+  -moz-animation-delay: 0.2s;
+  -ms-animation-delay: 0.2s;
+  -o-animation-delay: 0.2s;
+  animation-delay: 0.2s;
+}
+
+.row > div:nth-child(3) {
+  -webkit-animation-delay: 0.4s;
+  -moz-animation-delay: 0.4s;
+  -ms-animation-delay: 0.4s;
+  -o-animation-delay: 0.4s;
+  animation-delay: 0.4s;
+}
+
+.row > div:nth-child(4) {
+  animation-delay: 0.6s;
+}
+
+.row > div:nth-child(5) {
+  animation-delay: 0.8s;
 }
 
 .keyboard {
@@ -90,6 +118,7 @@ nav h1 {
   justify-content: center;
   margin: 5px;
 }
+
 .line2 {
   flex: 33%;
   display: flex;
@@ -97,6 +126,7 @@ nav h1 {
   justify-content: center;
   margin: 5px;
 }
+
 .line3 {
   flex: 33%;
   display: flex;
@@ -119,9 +149,31 @@ nav h1 {
   cursor: pointer;
 }
 
-#big {
+.big {
   width: 100px;
 }
-#disabled {
+
+.disabled {
   background-color: #3a393c;
+}
+
+/* animations */
+
+@keyframes flip {
+  0% {
+    transform: rotateX(0);
+    background-color: #121212;
+  }
+  45% {
+    transform: rotateX(90deg);
+    background-color: #121212;
+  }
+  55% {
+    transform: rotateX(90deg);
+    background-color: var(--background-color);
+  }
+  100% {
+    transform: rotateX(0);
+    background-color: var(--background-color);
+  }
 }
