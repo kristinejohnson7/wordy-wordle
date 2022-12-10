@@ -8,25 +8,15 @@ interface LetterProps {
 
 export default function Letter({ letterPos, attemptVal }: LetterProps) {
   const contextValues = useContext(AppContext);
-  if (!contextValues) return null;
-  const {
-    board,
-    correctWord,
-    currentAttempt,
-    disabledLetters,
-    setDisabledLetters,
-  } = contextValues;
-
-  useEffect(() => {
-    if (letter !== "" && !correct && !almost) {
-      setDisabledLetters((prev) => [...prev, letter]);
-    }
-  }, [currentAttempt.attempt]);
+  if (!contextValues) throw new Error();
+  const { board, correctWord, currentAttempt, setDisabledLetters } =
+    contextValues;
 
   const letter = board[attemptVal][letterPos];
 
-  const correct = correctWord[letterPos] === letter;
-  const almost = !correct && letter !== "" && correctWord.includes(letter);
+  const correct = correctWord.toUpperCase()[letterPos] === letter;
+  const almost =
+    !correct && letter !== "" && correctWord.toUpperCase().includes(letter);
   const letterState =
     currentAttempt.attempt > attemptVal
       ? correct
@@ -35,6 +25,12 @@ export default function Letter({ letterPos, attemptVal }: LetterProps) {
         ? "almost"
         : "error"
       : "";
+
+  useEffect(() => {
+    if (letter !== "" && !correct && !almost) {
+      setDisabledLetters((prev) => [...prev, letter]);
+    }
+  }, [currentAttempt.attempt]);
 
   return <div className={`letter ${letterState}`}>{letter}</div>;
 }

@@ -1,6 +1,7 @@
 import React, { useState, createContext, useEffect } from "react";
 import "./App.css";
 import Board from "./components/Board";
+import GameOver from "./components/GameOver";
 import Keyboard from "./components/Keyboard";
 import { boardDefault } from "./Words";
 import { generateWordSet } from "./Words";
@@ -18,9 +19,20 @@ interface AppContextInterface {
   onSelectLetter: (keyVal: string) => void;
   onDelete: () => void;
   onEnter: () => void;
-  correctWord: string;
   disabledLetters: string[];
-  setDisabledLetters: React.Dispatch<React.SetStateAction<never[]>>;
+  setDisabledLetters: React.Dispatch<React.SetStateAction<string[]>>;
+  gameOver: {
+    gameOver: boolean;
+    guessedWord: boolean;
+  };
+  setGameOver: React.Dispatch<
+    React.SetStateAction<{
+      gameOver: boolean;
+      guessedWord: boolean;
+    }>
+  >;
+  correctWord: string;
+  setCorrectWord: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const AppContext = createContext<AppContextInterface | null>(null);
@@ -32,14 +44,18 @@ function App() {
     letterPos: 0,
   });
   const [wordSet, setWordSet] = useState(new Set());
-  const [disabledLetters, setDisabledLetters] = useState([]);
-
-  const correctWord = "RIGHT";
+  const [disabledLetters, setDisabledLetters] = useState<string[]>([]);
+  const [gameOver, setGameOver] = useState({
+    gameOver: false,
+    guessedWord: false,
+  });
+  const [correctWord, setCorrectWord] = useState("");
 
   useEffect(() => {
     generateWordSet().then((words) => {
-      if (words.wordSet) {
+      if (words.wordSet && words.todaysWord) {
         setWordSet(words.wordSet);
+        setCorrectWord(words.todaysWord);
       }
     });
   }, []);
@@ -81,7 +97,12 @@ function App() {
     }
 
     if (currentWord === correctWord) {
-      alert("Game over");
+      setGameOver({ gameOver: true, guessedWord: true });
+      return;
+    }
+
+    if (currentAttempt.attempt === 5) {
+      setGameOver({ gameOver: true, guessedWord: false });
     }
   };
 
@@ -94,8 +115,11 @@ function App() {
     onDelete,
     onEnter,
     correctWord,
+    setCorrectWord,
     disabledLetters,
     setDisabledLetters,
+    gameOver,
+    setGameOver,
   };
 
   return (
@@ -106,7 +130,7 @@ function App() {
       <AppContext.Provider value={contextValues}>
         <div className="game">
           <Board />
-          <Keyboard />
+          {gameOver.gameOver ? <GameOver /> : <Keyboard />}
         </div>
       </AppContext.Provider>
     </div>
