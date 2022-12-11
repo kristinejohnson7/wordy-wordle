@@ -9,8 +9,13 @@ interface LetterProps {
 export default function Letter({ letterPos, attemptVal }: LetterProps) {
   const contextValues = useContext(AppContext);
   if (!contextValues) throw new Error();
-  const { board, correctWord, currentAttempt, setDisabledLetters } =
-    contextValues;
+  const {
+    board,
+    correctWord,
+    currentAttempt,
+    setDisabledLetters,
+    disabledLetters,
+  } = contextValues;
 
   const letter = board[attemptVal][letterPos];
 
@@ -28,7 +33,22 @@ export default function Letter({ letterPos, attemptVal }: LetterProps) {
 
   useEffect(() => {
     if (letter !== "" && !correct && !almost) {
-      setDisabledLetters((prev) => [...prev, letter]);
+      setDisabledLetters((disabledLetters) => ({
+        ...disabledLetters,
+        general: [...disabledLetters.general, letter],
+      }));
+    }
+    if (letter !== "" && correct) {
+      setDisabledLetters((disabledLetters) => ({
+        ...disabledLetters,
+        correct: [...disabledLetters.correct, letter],
+      }));
+    }
+    if (letter !== "" && almost) {
+      setDisabledLetters((disabledLetters) => ({
+        ...disabledLetters,
+        almost: [...disabledLetters.almost, letter],
+      }));
     }
   }, [currentAttempt.attempt]);
 

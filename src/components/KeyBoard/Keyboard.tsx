@@ -56,7 +56,9 @@ export default function Keyboard() {
             <Key
               key={index}
               keyVal={key}
-              disabled={disabledLetters.includes(key)}
+              disabled={disabledLetters.general.includes(key)}
+              almost={disabledLetters.almost.includes(key)}
+              correct={disabledLetters.correct.includes(key)}
             />
           );
         })}
@@ -67,7 +69,9 @@ export default function Keyboard() {
             <Key
               key={index}
               keyVal={key}
-              disabled={disabledLetters.includes(key)}
+              disabled={disabledLetters.general.includes(key)}
+              almost={disabledLetters.almost.includes(key)}
+              correct={disabledLetters.correct.includes(key)}
             />
           );
         })}
@@ -79,7 +83,9 @@ export default function Keyboard() {
             <Key
               key={index}
               keyVal={key}
-              disabled={disabledLetters.includes(key)}
+              disabled={disabledLetters.general.includes(key)}
+              almost={disabledLetters.almost.includes(key)}
+              correct={disabledLetters.correct.includes(key)}
             />
           );
         })}

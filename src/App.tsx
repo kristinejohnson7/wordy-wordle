@@ -20,8 +20,18 @@ interface AppContextInterface {
   onSelectLetter: (keyVal: string) => void;
   onDelete: () => void;
   onEnter: () => void;
-  disabledLetters: string[];
-  setDisabledLetters: React.Dispatch<React.SetStateAction<string[]>>;
+  disabledLetters: {
+    general: string[];
+    almost: string[];
+    correct: string[];
+  };
+  setDisabledLetters: React.Dispatch<
+    React.SetStateAction<{
+      general: string[];
+      almost: string[];
+      correct: string[];
+    }>
+  >;
   gameOver: {
     gameOver: boolean;
     guessedWord: boolean;
@@ -45,7 +55,11 @@ function App() {
     letterPos: 0,
   });
   const [wordSet, setWordSet] = useState(new Set());
-  const [disabledLetters, setDisabledLetters] = useState<string[]>([]);
+  const [disabledLetters, setDisabledLetters] = useState({
+    general: [""],
+    almost: [""],
+    correct: [""],
+  });
   const [gameOver, setGameOver] = useState({
     gameOver: false,
     guessedWord: false,
