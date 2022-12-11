@@ -1,9 +1,9 @@
-import React from 'react'
-import Letter from './Letter';
+import React from "react";
+import Letter from "./Letter";
 
 export default function Board() {
   return (
-    <div className='board'>
+    <div className="board">
       <div className="row">
         <Letter letterPos={0} attemptVal={0} />
         <Letter letterPos={1} attemptVal={0} />
@@ -47,5 +47,5 @@ export default function Board() {
         <Letter letterPos={4} attemptVal={5} />
       </div>
     </div>
-  )
+  );
 }

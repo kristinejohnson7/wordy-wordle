@@ -1,0 +1,27 @@
+.key {
+  width: 40px;
+  height: 55px;
+  margin: 5px;
+  border-radius: 4px;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+  font-size: 13.3333px;
+  background-color: grey;
+  color: white;
+  font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+  cursor: pointer;
+
+  img {
+    width: 35px;
+  }
+}
+
+.big {
+  width: 65px;
+  font-size: 12px;
+}
+
+.disabled {
+  background-color: #3a393c;
+}

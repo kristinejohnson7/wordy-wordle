@@ -1,0 +1,14 @@
+.keyboard {
+  width: 700px;
+  height: 300px;
+
+  .line1,
+  .line2,
+  .line3 {
+    flex: 33%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 4px;
+  }
+}

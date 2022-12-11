@@ -1,0 +1,19 @@
+.navbar {
+  height: 65px;
+  width: 100%;
+  margin: 0;
+  border-bottom: 1px solid #3a3a3c;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  place-items: center;
+  font-family: "Roboto Slab", serif;
+
+  h1,
+  .Typewriter {
+    margin: 0;
+    color: white;
+    font-size: 26px;
+    letter-spacing: 0.36px;
+  }
+}

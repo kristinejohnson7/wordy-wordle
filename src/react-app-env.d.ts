@@ -1,6 +1,11 @@
 /// <reference types="react-scripts" />
 
-declare module '*.txt' {
+declare module "*.txt" {
+  const content: any;
+  export default content;
+}
+
+declare module "*.svg" {
   const content: any;
   export default content;
 }

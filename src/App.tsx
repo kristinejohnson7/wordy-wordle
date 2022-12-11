@@ -1,10 +1,11 @@
 import React, { useState, createContext, useEffect } from "react";
 import "./App.css";
-import Board from "./components/Board";
-import GameOver from "./components/GameOver";
-import Keyboard from "./components/Keyboard";
+import Board from "./components/Board/Board";
+import GameOver from "./components/GameOver/GameOver";
+import Keyboard from "./components/KeyBoard/Keyboard";
 import { boardDefault } from "./Words";
 import { generateWordSet } from "./Words";
+import Nav from "./components/Nav/Nav";
 
 interface AppContextInterface {
   board: string[][];
@@ -124,9 +125,7 @@ function App() {
 
   return (
     <div className="App">
-      <nav>
-        <h1>Wordle</h1>
-      </nav>
+      <Nav />
       <AppContext.Provider value={contextValues}>
         <div className="game">
           <Board />

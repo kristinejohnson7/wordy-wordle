@@ -1,5 +1,7 @@
 import React, { useContext } from "react";
-import { AppContext } from "../App";
+import { AppContext } from "../../App";
+import deleteIcon from "../../assets/delete.svg";
+import "./Key.scss";
 
 export interface Props {
   keyVal: string;
@@ -28,7 +30,11 @@ export default function Key({ keyVal, bigKey, disabled }: Props) {
       className={`key ${bigKey ? "big" : disabled && "disabled"}`}
       onClick={selectLetter}
     >
-      {keyVal}
+      {keyVal === "DELETE" ? (
+        <img src={deleteIcon} alt="delete icon" />
+      ) : (
+        keyVal
+      )}
     </div>
   );
 }

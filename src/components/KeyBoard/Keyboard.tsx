@@ -1,7 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useContext, useEffect } from "react";
-import { AppContext } from "../App";
+import { AppContext } from "../../App";
 import Key from "./Key";
+import "./Keyboard.scss";
 
 export default function Keyboard() {
   const keys1 = ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"];
