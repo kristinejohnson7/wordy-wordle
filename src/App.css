@@ -4,6 +4,7 @@
   width: 100vw;
   height: 100vh;
   color: white;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
@@ -18,93 +19,27 @@ body {
   align-items: center;
   padding-top: 80px;
   flex-direction: column;
+  position: relative;
 }
 
-.board {
-  width: 450px;
-  height: 550px;
-  display: flex;
-  flex-direction: column;
-}
-
-.row {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-
-.letter {
-  height: 55px;
-  border: 2px solid #3a3a3c;
-  margin: 3.5px;
-  display: grid;
-  place-items: center;
-  font-size: 30px;
-  line-height: 32px;
+.wordError {
+  background-color: white;
+  opacity: 1;
+  color: black;
+  border-radius: 5px;
+  position: absolute;
+  top: 20px;
+  padding: 13px;
+  font-size: 14px;
   font-weight: 700;
-  color: white;
-  font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
-  width: 55px;
 }
 
-.row > div.correct {
-  --background-color: #528d4e;
-  animation: flip 0.5s ease forwards;
-  border: 0;
+.alert-shown {
+  opacity: 1;
+  transition: all 250ms linear;
 }
 
-.row > div.almost {
-  --background-color: #b49f39;
-  animation: flip 0.5s ease forwards;
-  border: 0;
-}
-
-.row > div.error {
-  --background-color: #3a393c;
-  animation: flip 0.5s ease forwards;
-}
-
-.row > div:nth-child(2) {
-  -webkit-animation-delay: 0.2s;
-  -moz-animation-delay: 0.2s;
-  -ms-animation-delay: 0.2s;
-  -o-animation-delay: 0.2s;
-  animation-delay: 0.2s;
-}
-
-.row > div:nth-child(3) {
-  -webkit-animation-delay: 0.4s;
-  -moz-animation-delay: 0.4s;
-  -ms-animation-delay: 0.4s;
-  -o-animation-delay: 0.4s;
-  animation-delay: 0.4s;
-}
-
-.row > div:nth-child(4) {
-  animation-delay: 0.6s;
-}
-
-.row > div:nth-child(5) {
-  animation-delay: 0.8s;
-}
-
-/* animations */
-
-@keyframes flip {
-  0% {
-    transform: rotateX(0);
-    background-color: #121212;
-  }
-  45% {
-    transform: rotateX(90deg);
-    background-color: #121212;
-  }
-  55% {
-    transform: rotateX(90deg);
-    background-color: var(--background-color);
-  }
-  100% {
-    transform: rotateX(0);
-    background-color: var(--background-color);
-  }
+.alert-hidden {
+  opacity: 0;
+  transition: all 250ms linear 2s;
 }

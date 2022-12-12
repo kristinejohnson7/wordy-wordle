@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../App";
 
 interface LetterProps {
@@ -9,13 +9,8 @@ interface LetterProps {
 export default function Letter({ letterPos, attemptVal }: LetterProps) {
   const contextValues = useContext(AppContext);
   if (!contextValues) throw new Error();
-  const {
-    board,
-    correctWord,
-    currentAttempt,
-    setDisabledLetters,
-    disabledLetters,
-  } = contextValues;
+  const { board, correctWord, currentAttempt, setDisabledLetters } =
+    contextValues;
 
   const letter = board[attemptVal][letterPos];
 
@@ -50,7 +45,24 @@ export default function Letter({ letterPos, attemptVal }: LetterProps) {
         almost: [...disabledLetters.almost, letter],
       }));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentAttempt.attempt]);
 
-  return <div className={`letter ${letterState}`}>{letter}</div>;
+  const [scale, setScale] = useState(false);
+
+  useEffect(() => {
+    if (letter) {
+      setScale(true);
+
+      setTimeout(() => {
+        setScale(false);
+      }, 100);
+    }
+  }, [letter]);
+
+  return (
+    <div className={`letter ${letterState} ${scale ? "scale" : null}`}>
+      {letter}
+    </div>
+  );
 }

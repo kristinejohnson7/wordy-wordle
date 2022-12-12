@@ -44,6 +44,7 @@ interface AppContextInterface {
   >;
   correctWord: string;
   setCorrectWord: React.Dispatch<React.SetStateAction<string>>;
+  wordError: boolean;
 }
 
 export const AppContext = createContext<AppContextInterface | null>(null);
@@ -65,6 +66,7 @@ function App() {
     guessedWord: false,
   });
   const [correctWord, setCorrectWord] = useState("");
+  const [wordError, setWordError] = useState(false);
 
   useEffect(() => {
     generateWordSet().then((words) => {
@@ -108,7 +110,7 @@ function App() {
     if (wordSet.has(currentWord.toLowerCase())) {
       setCurrentAttempt({ attempt: currentAttempt.attempt + 1, letterPos: 0 });
     } else {
-      alert("Word not found");
+      setWordError(true);
     }
 
     if (currentWord === correctWord) {
@@ -135,6 +137,7 @@ function App() {
     setDisabledLetters,
     gameOver,
     setGameOver,
+    wordError,
   };
 
   return (
@@ -142,6 +145,14 @@ function App() {
       <Nav />
       <AppContext.Provider value={contextValues}>
         <div className="game">
+          <div
+            className={`alert alert-success wordError ${
+              wordError ? "alert-shown" : "alert-hidden"
+            }`}
+            onTransitionEnd={() => setWordError(false)}
+          >
+            Not in word list
+          </div>
           <Board />
           {gameOver.gameOver ? <GameOver /> : <Keyboard />}
         </div>

@@ -1,51 +1,33 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import Letter from "./Letter";
+import "./Board.scss";
+import { AppContext } from "../../App";
 
 export default function Board() {
+  const [rowError, setRow] = useState("row1");
+  const contextValues = useContext(AppContext);
+  if (!contextValues) throw new Error();
+  const { wordError } = contextValues;
+
+  const rows = [0, 1, 2, 3, 4, 5];
+  const letters = [0, 1, 2, 3, 4];
+
   return (
-    <div className="board">
-      <div className="row">
-        <Letter letterPos={0} attemptVal={0} />
-        <Letter letterPos={1} attemptVal={0} />
-        <Letter letterPos={2} attemptVal={0} />
-        <Letter letterPos={3} attemptVal={0} />
-        <Letter letterPos={4} attemptVal={0} />
-      </div>
-      <div className="row">
-        <Letter letterPos={0} attemptVal={1} />
-        <Letter letterPos={1} attemptVal={1} />
-        <Letter letterPos={2} attemptVal={1} />
-        <Letter letterPos={3} attemptVal={1} />
-        <Letter letterPos={4} attemptVal={1} />
-      </div>
-      <div className="row">
-        <Letter letterPos={0} attemptVal={2} />
-        <Letter letterPos={1} attemptVal={2} />
-        <Letter letterPos={2} attemptVal={2} />
-        <Letter letterPos={3} attemptVal={2} />
-        <Letter letterPos={4} attemptVal={2} />
-      </div>
-      <div className="row">
-        <Letter letterPos={0} attemptVal={3} />
-        <Letter letterPos={1} attemptVal={3} />
-        <Letter letterPos={2} attemptVal={3} />
-        <Letter letterPos={3} attemptVal={3} />
-        <Letter letterPos={4} attemptVal={3} />
-      </div>
-      <div className="row">
-        <Letter letterPos={0} attemptVal={4} />
-        <Letter letterPos={1} attemptVal={4} />
-        <Letter letterPos={2} attemptVal={4} />
-        <Letter letterPos={3} attemptVal={4} />
-        <Letter letterPos={4} attemptVal={4} />
-      </div>
-      <div className="row">
-        <Letter letterPos={0} attemptVal={5} />
-        <Letter letterPos={1} attemptVal={5} />
-        <Letter letterPos={2} attemptVal={5} />
-        <Letter letterPos={3} attemptVal={5} />
-        <Letter letterPos={4} attemptVal={5} />
-      </div>
+    <div className={`board ${wordError ? "shakeError" : null}`}>
+      {rows.map((row, index) => {
+        return (
+          <div
+            className={`row ${
+              wordError && rowError === `row${index}` ? "shakeError" : null
+            }`}
+            onKeyDown={() => setRow(`row${index}`)}
+          >
+            {letters.map((letter) => (
+              <Letter letterPos={letter} attemptVal={row} />
+            ))}
+          </div>
+        );
+      })}
     </div>
   );
 }
