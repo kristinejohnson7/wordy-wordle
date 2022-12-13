@@ -113,7 +113,7 @@ function App() {
       setWordError(true);
     }
 
-    if (currentWord === correctWord) {
+    if (currentWord.toLowerCase() === correctWord) {
       setGameOver({ gameOver: true, guessedWord: true });
       return;
     }
