@@ -139,6 +139,7 @@ function App() {
     setGameOver,
     wordError,
   };
+  console.log(correctWord);
 
   return (
     <div className="App">
