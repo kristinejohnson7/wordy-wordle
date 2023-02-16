@@ -10,11 +10,12 @@ export default function GameOver() {
   if (!contextValues) return null;
   const { gameOver, correctWord, currentAttempt } = contextValues;
 
-  console.log("youre in game over");
+  const onRefresh = () => window.location.reload();
 
   return (
     <div className="modal">
       <div>
+        <button onClick={onRefresh}>Start a new game</button>
         <h3>
           {gameOver.guessedWord ? "You did it!" : "Better luck next time!"}
         </h3>

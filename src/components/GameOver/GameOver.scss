@@ -21,4 +21,15 @@
       width: 200px;
     }
   }
+
+  button {
+    border: 1px solid grey;
+    border-radius: 5px;
+    background-color: transparent;
+    color: lightgrey;
+    cursor: pointer;
+    display: flex;
+    margin-left: auto;
+    padding: 15px;
+  }
 }
