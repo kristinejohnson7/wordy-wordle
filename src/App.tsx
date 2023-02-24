@@ -70,8 +70,8 @@ function App() {
 
   useEffect(() => {
     generateWordSet().then((words) => {
-      if (words.wordSet && words.todaysWord) {
-        setWordSet(words.wordSet);
+      if (words.mergedSet && words.todaysWord) {
+        setWordSet(words.mergedSet);
         setCorrectWord(words.todaysWord);
       }
     });
@@ -139,7 +139,6 @@ function App() {
     setGameOver,
     wordError,
   };
-  console.log(correctWord);
 
   return (
     <div className="App">
